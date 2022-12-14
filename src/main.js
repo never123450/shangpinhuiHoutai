@@ -16,7 +16,7 @@ import '@/icons' // icon
 import '@/permission' // permission control
 import CategorySelect from '@/components/CategorySelect'
 Vue.component(CategorySelect.name, CategorySelect)
-    /**
+/**
      * If you don't want to use mock-server
      * you want to use MockJs for mock api
      * you can execute: mockXHR()
@@ -25,24 +25,24 @@ Vue.component(CategorySelect.name, CategorySelect)
      * please remove it before going online ! ! !
      */
 if (process.env.NODE_ENV === 'production') {
-    const { mockXHR } = require('../mock')
-    mockXHR()
+  const { mockXHR } = require('../mock')
+  mockXHR()
 }
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
-    // 如果想要中文版 element-ui，按如下方式声明
-    // Vue.use(ElementUI)
-    //引入相关API请求接口
-import API from '@/api';
-//组件实例的原型的原型指向的是Vue.prototype
-//任意组件可以使用API相关的接口
-Vue.prototype.$API = API;
+// 如果想要中文版 element-ui，按如下方式声明
+// Vue.use(ElementUI)
+// 引入相关API请求接口
+import API from '@/api'
+// 组件实例的原型的原型指向的是Vue.prototype
+// 任意组件可以使用API相关的接口
+Vue.prototype.$API = API
 Vue.config.productionTip = false
 
 new Vue({
-    el: '#app',
-    router,
-    store,
-    render: h => h(App)
+  el: '#app',
+  router,
+  store,
+  render: h => h(App)
 })
