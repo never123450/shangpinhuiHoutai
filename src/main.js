@@ -40,6 +40,9 @@ import API from '@/api'
 Vue.prototype.$API = API
 Vue.config.productionTip = false
 
+import HintButton from '@/components/HintButton'
+Vue.component(HintButton.name, HintButton)
+
 new Vue({
   el: '#app',
   router,

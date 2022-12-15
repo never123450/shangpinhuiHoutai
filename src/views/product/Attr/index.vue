@@ -125,6 +125,7 @@ export default {
       this.attrInfo.attrValueList.forEach((item) => {
         // 这样书写也可以给属性值添加flag自动，但是会发现视图不会跟着变化（因为flag不是响应式数据）
         // 因为Vue无法探测普通的新增 property,这样书写的属性并非响应式属性（数据变化视图跟这边）
+        // item.flag = false
         // 第一个参数:对象  第二个参数:添加新的响应式属性  第三参数：新的属性的属性值
         this.$set(item, 'flag', false)
       })
@@ -171,11 +172,14 @@ export default {
         if (row !== item) {
           return row.valueName === item.valueName
         }
-        if (isRepat) return
-        // row：形参是当前用户添加的最新的属性值
-        // 当前编辑模式变为查看模式【让input消失，显示span】
-        row.flag = false
       })
+      if (isRepat) {
+        this.$message('重复辣!')
+        return
+      }
+      // row：形参是当前用户添加的最新的属性值
+      // 当前编辑模式变为查看模式【让input消失，显示span】
+      row.flag = false
     },
     // 点击span的回调,展示input
     toEdit(row, index) {
@@ -195,6 +199,14 @@ export default {
     },
     // 保存按钮：进行添加属性或者修改属性的操作
     async addOrUpdateAttr() {
+      for (let i = 0; i < this.attrInfo.attrValueList.length; i++) {
+        for (let j = 1; i < this.attrInfo.attrValueList.length; j++) {
+          if (this.attrInfo.attrValueList[i].valueName === this.attrInfo.attrValueList[j].valueName) {
+            this.$message('重复辣lalala!')
+            return
+          }
+        }
+      }
       // 整理参数:1,如果用户添加很多属性值，且属性值为空的不应该提交给服务器
       // 提交给服务器数据当中不应该出现flag字段
       this.attrInfo.attrValueList = this.attrInfo.attrValueList.filter(
